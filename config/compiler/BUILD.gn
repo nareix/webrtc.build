@@ -267,6 +267,8 @@ config("compiler") {
     cflags_cc += [
       "-Wno-undefined-bool-conversion",
       "-Wno-tautological-undefined-compare",
+      "-Wno-pointer-bool-conversion",
+      "-Wno-deprecated-declarations",
     ]
   }
 
@@ -1389,6 +1391,9 @@ config("wexit_time_destructors") {
 config("no_size_t_to_int_warning") {
   if (is_win && current_cpu == "x64") {
     cflags = [ "/wd4267" ]
+  }
+  if (is_mac && is_clang){
+    cflags = ["-Wno-deprecated-declarations",]
   }
 }
 
